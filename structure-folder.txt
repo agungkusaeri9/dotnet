@@ -1,0 +1,12 @@
+YourApp/
+│
+├── Controllers/         # Tempat untuk API endpoint (UserController, AuthController)
+├── DTOs/                # Data Transfer Object (UserDto, CreateUserDto, etc)
+├── Models/              # Entity atau class model (User.cs, etc)
+├── Data/                # Context class (ApplicationDbContext.cs)
+├── Services/            # Business logic (UserService.cs)
+├── Repositories/        # Data access logic (UserRepository.cs)
+├── Validators/          # FluentValidation untuk DTO
+├── Middleware/          # Custom middleware (optional)
+├── Program.cs           # Entry point & dependency injection
+├── appsettings.json     # Config file (connection string, dll)

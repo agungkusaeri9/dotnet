@@ -1,0 +1,2 @@
+1. ORM: Microsoft.EntityFrameworkCore, Microsoft.EntityFrameworkCore.SqlServer
+2. Validation: FluentValidation.AspNetCore

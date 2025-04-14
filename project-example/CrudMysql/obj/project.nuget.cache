@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "7qUeJ97wQRA=",
+  "success": true,
+  "projectFilePath": "D:\\Agung\\dotnet\\project-example\\CrudMysql\\CrudMysql.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\agung\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.0\\microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
+    "C:\\Users\\agung\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
