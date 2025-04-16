@@ -18,12 +18,12 @@ namespace crudmysql.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(int page = 1, int limit = 10)
         {
             try
             {
-                var users = await _userService.GetAllUsersAsync();
-                return ResponseFormatter.Success(users, "Success mengambil data");
+                var (data, pagination) = await _userService.GetAllUsersAsync(page, limit);
+                return ResponseFormatter.Success(data, "Success mengambil data",200,pagination);
             }
             catch (Exception ex)
             {
@@ -41,7 +41,7 @@ namespace crudmysql.Controllers
                 var createdUser = await _userService.CreateUserAsync(user);
                 return ResponseFormatter.Success(createdUser);
             }
-            catch (ArgumentException ex) // Misal input invalid / sudah ada
+            catch (ArgumentException ex) 
             {
                 return BadRequest(new
                 {
@@ -98,7 +98,7 @@ namespace crudmysql.Controllers
             }
             catch (ArgumentException ex)
             {
-               return ResponseFormatter.ValidationError(ex.Message);
+                return ResponseFormatter.ValidationError(ex.Message);
             }
             catch (Exception ex)
             {

@@ -11,15 +11,15 @@ namespace crudmysql.Models
 
         [MaxLength(100)]
         [Column("name")] // Kolom "name"
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [MaxLength(100)]
 
         [Column("email")] // Kolom "email"
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [MaxLength(100)]
         [Column("password")] // Kolom "password"
-        public string Password { get; set; }
+        public string? Password { get; set; }
     }
 }

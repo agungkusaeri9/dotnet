@@ -1,4 +1,6 @@
 ﻿using crudmysql.Data;
+using crudmysql.DTOs.Pagination;
+using crudmysql.DTOs.Product;
 using crudmysql.DTOs.User;
 using crudmysql.Models;
 using Microsoft.AspNetCore.Identity;
@@ -16,16 +18,31 @@ namespace crudmysql.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<List<UserDTO>> GetAllUsersAsync()
+        public async Task<(List<UserDTO> Data, PaginationInfo Pagination)> GetAllUsersAsync(int page, int perPage)
         {
-            return await _context.Users
+            var total = await _context.Users.CountAsync();
+            var items = await _context.Users
                 .Select(u => new UserDTO
                 {
                     Id = u.Id,
                     Name = u.Name,
                     Email = u.Email
                 })
+                .Skip((page - 1) * perPage)
+                .Take(perPage)
                 .ToListAsync();
+
+            var pagination = new PaginationInfo
+            {
+                Page = page,
+                PerPage = perPage,
+                Total = total,
+                TotalPages = (int)Math.Ceiling(total / (double)perPage),
+                From = ((page - 1) * perPage) + 1,
+                To = Math.Min(page * perPage, total)
+            };
+
+            return (items, pagination);
         }
 
         public async Task<UserDTO?> GetUserByIdAsync(int id)

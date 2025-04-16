@@ -1,17 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Dynamic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace crudmysql.Helpers
 {
     public static class ResponseFormatter
     {
-        public static IActionResult Success(object? data = null, string? message = "Success", int code = 200)
+        public static IActionResult Success(object? data = null, string? message = "Success", int code = 200, object? pagination = null)
         {
-            var response = new
+            dynamic response = new ExpandoObject();
+            response.success = true;
+            response.message = message;
+            response.data = data;
+
+            if (pagination != null)
             {
-                success = true,
-                message,
-                data
-            };
+                response.pagination = pagination;
+            }
 
             return code switch
             {
@@ -52,13 +56,26 @@ namespace crudmysql.Helpers
             var response = new
             {
                 success = false,
-                message,
-                data = (object?)null,
+                message
             };
 
             return new ObjectResult(response)
             {
                 StatusCode = 404
+            };
+        }
+
+        public static IActionResult ServerError(string? message = "Internal Server Error")
+        {
+            var response = new
+            {
+                success = false,
+                message
+            };
+
+            return new ObjectResult(response)
+            {
+                StatusCode = 500
             };
         }
     }
