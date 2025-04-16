@@ -100,11 +100,11 @@ namespace crudmysql.Services
 
 
 
-        public async Task<ProductDTO?> getById(int Id)
+        public async Task<ProductDTO?> getById(int id)
         {
             try
             {
-                var Product = await _context.Products.Where(u => u.Id == Id).Select(u => new ProductDTO
+                var Product = await _context.Products.Where(u => u.Id == id).Select(u => new ProductDTO
                 {
                     Id = u.Id,
                     Name = u.Name,

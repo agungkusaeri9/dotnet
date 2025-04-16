@@ -2,6 +2,7 @@
 using crudmysql.Helpers;
 using crudmysql.Models;
 using crudmysql.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace crudmysql.Controllers
@@ -11,8 +12,8 @@ namespace crudmysql.Controllers
     public class ProductController : ControllerBase
     {
 
-        private readonly ProductService _productService;
-        public ProductController(ProductService productService)
+        private readonly IProductService _productService;
+        public ProductController(IProductService productService)
         {
             _productService = productService;
         }
@@ -54,12 +55,12 @@ namespace crudmysql.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int Id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
 
-                var ProductItem = await _productService.getById(Id);
+                var ProductItem = await _productService.getById(id);
                 if (ProductItem == null)
                 {
                     return ResponseFormatter.NotFound("Product not found");
